@@ -1,7 +1,6 @@
 export default function Project({
   project,
   handleBack,
-  handleEdit,
   handleDelete,
 }) {
   const classes =
@@ -16,7 +15,7 @@ export default function Project({
         </div>
         <div className="flex items-end gap-4 mx-20">
           <li>
-            <button className={classes} onClick={handleEdit}>
+            <button className={classes}>
               Edit
             </button>
           </li>

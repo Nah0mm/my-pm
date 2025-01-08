@@ -41,16 +41,13 @@ export default function Master() {
   };
 
   const handleDelete = (id) => {
-    const toBeDeleted = projectsState.projects.findIndex(
-      (project) => project.id == id
-    );
-    let newState;
-    setProjectsState((prev) => (
-       {...prev,selectedProject:undefined}
-    ));
-    console.log(projectsState)
+    setProjectsState((prev) => ({
+      projects: [...prev.projects.filter((project) => project.id !== id)],
+      selectedProject: undefined
+    }));
+    
   };
-  
+  console.log(projectsState)
   let content;
   if (projectsState.selectedProject === undefined) {
     content = <NoProject setAddProject={setAddProject} />;
@@ -70,17 +67,15 @@ export default function Master() {
         project={projectsState.projects[selectedCurrentProject]}
         projectsState={projectsState}
         handleBack={handleBack}
-        handleEdit=""
         handleDelete={handleDelete}
       />
     );
   }
-
   return (
     <div className="flex gap-4 items-center my-10 h-screen">
       <Sidebar
         setAddProject={setAddProject}
-        projects={projectsState.projects}
+         projects={projectsState.projects}
         getDetails={getDetails}
       />
       {content}
