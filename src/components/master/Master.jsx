@@ -21,7 +21,7 @@ export default function Master() {
 
   const getAddedProject = (newpro) => {
     setProjectsState((prevState) => ({
-      projects: [...prevState.projects, newpro],
+      projects: [newpro,...prevState.projects.map(project=>project)],
       selectedProject: undefined,
     }));
   };
@@ -43,11 +43,9 @@ export default function Master() {
   const handleDelete = (id) => {
     setProjectsState((prev) => ({
       projects: [...prev.projects.filter((project) => project.id !== id)],
-      selectedProject: undefined
+      selectedProject: undefined,
     }));
-    
   };
-  console.log(projectsState)
   let content;
   if (projectsState.selectedProject === undefined) {
     content = <NoProject setAddProject={setAddProject} />;
@@ -75,7 +73,7 @@ export default function Master() {
     <div className="flex gap-4 items-center my-10 h-screen">
       <Sidebar
         setAddProject={setAddProject}
-         projects={projectsState.projects}
+        projects={projectsState.projects}
         getDetails={getDetails}
       />
       {content}

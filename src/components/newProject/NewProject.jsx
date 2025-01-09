@@ -6,19 +6,27 @@ export default function NewProject({ handleCancel, getAddedProject }) {
   const description = useRef();
   const dueDate = useRef();
 
-  const handleAdd=()=>{
-    const enteredTitle=title.current.value
-    const enteredDesc=description.current.value
-    const enteredDate=dueDate.current.value
+  const handleAdd = () => {
+    const enteredTitle = title.current.value;
+    const enteredDesc = description.current.value;
+    const enteredDate = dueDate.current.value;
 
-    const addedProject={
-      id:Math.random(),
-      title:enteredTitle,
-      description:enteredDesc,
-      dueDate:enteredDate
+    if (
+      enteredDate.length === 0 ||
+      enteredTitle.length === 0 ||
+      enteredDesc.length === 0
+    ) {
+      console.log("No null values allowed");
+    } else {
+      const addedProject = {
+        id: Math.random(),
+        title: enteredTitle,
+        description: enteredDesc,
+        dueDate: enteredDate,
+      };
+      getAddedProject(addedProject);
     }
-    getAddedProject(addedProject)
-  }
+  };
   return (
     <div className="w-[35rem] h-full">
       <menu className="flex items-center gap-2 justify-end">
