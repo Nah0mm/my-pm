@@ -1,7 +1,10 @@
 import Input from "../UI/Input";
 import { useRef } from "react";
 
+import Modal from '../modal/Modal'
+
 export default function NewProject({ handleCancel, getAddedProject }) {
+  const modal=useRef();
   const title = useRef();
   const description = useRef();
   const dueDate = useRef();
@@ -12,11 +15,11 @@ export default function NewProject({ handleCancel, getAddedProject }) {
     const enteredDate = dueDate.current.value;
 
     if (
-      enteredDate.length === 0 ||
-      enteredTitle.length === 0 ||
-      enteredDesc.length === 0
+      enteredDate.trim() === '' ||
+      enteredTitle.trim() === '' ||
+      enteredDesc.trim() === ''
     ) {
-      console.log("No null values allowed");
+      modal.current.open()
     } else {
       const addedProject = {
         id: Math.random(),
@@ -28,6 +31,11 @@ export default function NewProject({ handleCancel, getAddedProject }) {
     }
   };
   return (
+    <>
+    <Modal ref={modal}>
+      <h2 className="font-bold text-zinc-700">Invalid input</h2>
+      <p className="my-3 text-zinc-700">Ooops....you forgot to enter a value</p>
+      </Modal>
     <div className="w-[35rem] h-full">
       <menu className="flex items-center gap-2 justify-end">
         <li className="px-2">
@@ -58,5 +66,6 @@ export default function NewProject({ handleCancel, getAddedProject }) {
         <Input labelName="Due Date" ref={dueDate} type="date" />
       </div>
     </div>
+    </>
   );
 }
