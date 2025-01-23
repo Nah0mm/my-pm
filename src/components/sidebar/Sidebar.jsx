@@ -2,7 +2,7 @@ import Button from "../UI/Button";
 
 export default function Sidebar({ setAddProject, projects, getDetails }) {
   return (
-    <div className="w-1/3 h-full p-7 text-zinc-200 text-xl bg-zinc-950">
+    <div className="w-1/3 h-full p-7 text-zinc-200 text-xl bg-zinc-950 rounded-md">
       <h2 className="font-bold">My Projects</h2>
       <p className="my-4">
         <Button onClick={setAddProject}>+ Add Projects</Button>

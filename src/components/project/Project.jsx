@@ -1,46 +1,33 @@
-export default function Project({
-  project,
-  handleBack,
-  handleDelete,
-}) {
+import Tasks from "../tasks/Tasks";
+
+export default function Project({ project, handleBack, handleDelete }) {
   const classes =
     "px-4 py-2 bg-zinc-700 text-zinc-200 font-bold rounded-sm hover:bg-zinc-950 ";
+  const formattedDate = new Date(project.dueDate).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
   return (
     <div className="w-[35rem] h-full">
-      <menu className="flex gap-8 items">
+      <menu className="flex justify-between">
         <div>
-          <button className={classes} onClick={handleBack}>
-            Back
-          </button>
+          <h2 className="text-2xl font-bold">{project.title}</h2>
+          <p className="text-zinc-500">{formattedDate}</p>
         </div>
-        <div className="flex items-end gap-4 mx-20">
-          <li>
-            <button className={classes}>
-              Edit
-            </button>
-          </li>
-          <li>
-            <button
-              className="px-4 py-2 text-zinc- font-bold rounded-sm hover:bg-red-950 hover:text-zinc-200"
-              onClick={() => handleDelete(project.id)}
-            >
-              Delete
-            </button>
-          </li>
-        </div>
+        <button
+          className="h-11 px-3 text-zinc- font-bold rounded-md text-zinc-200 bg-zinc-800 hover:bg-zinc-950 "
+          onClick={() => handleDelete(project.id)}
+        >
+          Delete
+        </button>
       </menu>
-      <div className="text-zinc-950 flex flex-col mt-8 ">
-        <div className="flex py-4 font-bold">
-            <h2 className="uppercase">Title:</h2>
-            <h2 className="px-3">{project.title}</h2>
+      <div className="text-zinc-950 flex flex-col mt-4 ">
+        <div className="flex py-4">
+          <p className="whitespace-pre-wrap">{project.description}</p>
         </div>
-        <div className="flex py-4 font-bold">
-            <h2 className="uppercase">Description:</h2>
-            <h2 className="px-3">{project.description}</h2>
-        </div>
-        <div className="flex py-4 font-bold">
-            <h2 className="uppercase">Due Date:</h2>
-            <h2 className="px-3">{project.dueDate}</h2>
+        <div className="flex py-4">
+          <Tasks />
         </div>
       </div>
     </div>
